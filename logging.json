@@ -1,0 +1,6 @@
+{
+    "LoggingEnabled": {
+        "TargetBucket": "hire.suzanne.immediately",
+        "TargetPrefix": "log/"
+    }
+}

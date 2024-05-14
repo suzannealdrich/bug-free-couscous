@@ -1,0 +1,23 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: demo-eks-cluster
+  region: us-west-2
+
+vpc:
+  subnets:
+    private:
+      us-west-2b: { id: subnet-05a90d4771a4e4242 }
+      us-west-2c: { id: subnet-00b30c52439066735 }
+      us-west-2d: { id: subnet-03323b474ce22d188 }
+      us-west-2a: { id: subnet-02e92902ee4085845 }
+
+nodeGroups:
+  - name: eks-nodes
+    instanceType: t3.medium
+    desiredCapacity: 2
+    privateNetworking: true # if only 'Private' subnets are given, this must be enabled    
+    iam:
+      withAddonPolicies:
+        imageBuilder: true

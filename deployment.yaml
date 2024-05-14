@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tasky-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: tasky-app
+  template:
+    metadata:
+      labels:
+        app: tasky-app
+    spec:
+      containers:
+      - name: tasky-app
+        image: 820568452168.dkr.ecr.us-west-2.amazonaws.com/tasky-app:latest
+        ports:
+        - containerPort: 8080
+        env:
+          - name: MONGODB_URI
+            valueFrom:
+              secretKeyRef:
+                name: mongo-uri
+                key: MONGODB_URI
+          - name: SECRET_KEY
+            valueFrom:
+              secretKeyRef:
+                name: jwt-auth
+                key: SECRET_KEY
